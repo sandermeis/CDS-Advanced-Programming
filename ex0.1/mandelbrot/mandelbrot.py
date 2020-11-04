@@ -23,7 +23,8 @@ def pixels(y, n, abs):
             for _ in range7:
                 for _ in range7:
                     z = z * z + c
-                if abs(z) >= 2.: break
+                if abs(z) >= 2.:
+                    break
             else:
                 pixel += pixel_bit
             c += c1
