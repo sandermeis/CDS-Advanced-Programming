@@ -10,6 +10,8 @@
 
 #include <iostream>
 #include <cmath>
+#include <iterator>
+#include <algorithm>
 
 unsigned int len(unsigned int n){
     return n ? len(n/10)+1 : 0;
