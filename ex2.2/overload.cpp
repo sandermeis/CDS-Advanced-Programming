@@ -1,23 +1,29 @@
 //
 // Created by Sander Meis on 09/11/2020.
 //
-//Implement the following overloaded min() functions
+// Implement the following overloaded min() functions
 // min(int,int)
 // min(double,double)
 // min(int[],int)
-//where the last function returns the minimum of an array of integers with a length specified by the 2nd argument
+// where the last function returns the minimum of an array of integers with a length specified by the 2nd argument
 //
-//Write a small program that tests your three implementations
+// Write a small program that tests your three implementations
 //
-//Now try call min() passing a double and an int as argument. Why doesn’t this work?
+// Now try call min() passing a double and an int as argument. Why doesn’t this work?
 //
-//Fix this problem without using explicit casts
+// The call is ambiguous, should it call the function with 2 double or with 2 ints?
+//
+// Fix this problem without using explicit casts
+//
+// I simply added a double min(int,double);, if you're actually going to use the code a double min(double,int) would also be handy
 
 #include <iostream>
 
 int min(int,int);
 
 double min(double,double);
+
+double min(int,double);
 
 int min(int[],int);
 
@@ -30,6 +36,7 @@ int main(){
     std::cout << min(a,b) << std::endl;
     std::cout << min(c,d) << std::endl;
     std::cout << min(e,10) << std::endl;
+    std::cout << min(a,d) << std::endl;
     return 0;
 }
 
@@ -43,6 +50,15 @@ int min(int a,int b){
 }
 
 double min(double a,double b){
+    if (a>b){
+        return b;
+    }
+    else{
+        return a;
+    }
+}
+
+double min(int a,double b){
     if (a>b){
         return b;
     }

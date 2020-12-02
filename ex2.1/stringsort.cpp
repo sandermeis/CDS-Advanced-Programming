@@ -3,10 +3,15 @@
 //
 // Why do you need the const here?
 //
+// Because the string literals are const by convention
+//
 // What type of argument should order() take?
+//
+// Order() takes references to const char pointer
 //
 // Why can’t you just compare the pointer values to compare the strings?
 //
+// Because the pointers are not necessarily in order
 
 
 #include <iostream>
