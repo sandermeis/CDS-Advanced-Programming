@@ -4,22 +4,30 @@
 
 // Constructor
 Stack::Stack() {
-    count=0;
-    LEN=80;
-    s = new double[LEN];
+    count = 0;
+    init(80);
 }
 
 // Specifying an initial size is useful because when you use less than the default initial, memory is wasted, when you use more,
 // time is wasted by growing the array
 Stack::Stack(int sz) {
     count = 0;
-    LEN = sz;
-    s = new double[LEN];
+    init(sz);
 }
 
+Stack::Stack(const Stack& sclone) {
+    count = sclone.count;
+    init(sclone.LEN);
+    for (int i = 0; i < LEN; i++) s[i] = sclone.s[i];
+}
 // Destructor
 Stack::~Stack() {
     delete[] s;
+}
+
+void Stack::init(double sz) {
+    LEN = sz;
+    s = new double[LEN];
 }
 
 // Methods
@@ -32,7 +40,7 @@ Stack::~Stack() {
 void Stack::push(double c) {
     if (full()) {
         std::cout << "Stack::push() Error: stack is full, assigning extra space" << std::endl;
-        grow(LEN); // Grows by amount LEN, so double it
+        grow(LEN);  // Grows by amount LEN, so double it
     }
     s[count++] = c;
 }

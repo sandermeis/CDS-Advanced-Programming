@@ -6,7 +6,7 @@ class Stack {
     // Constructor
     Stack();
     Stack(int sz);
-
+    Stack(const Stack& sclone);
     // Destructor
     ~Stack();
 
@@ -16,6 +16,7 @@ class Stack {
     bool empty() { return (count == 0); }
 
     // Methods
+    void init(double sz);
     void push(double c);
     void inspect();
     double pop();
