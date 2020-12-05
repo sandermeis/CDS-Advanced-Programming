@@ -23,6 +23,14 @@ int main() {
     std::cout << s.nitems() << " values in stack" << std::endl;
 
     // Read doubles back from fifo
+    for (int i = 0;i<10;i++) {
+        double val = s.pop();
+        //std::cout << "popping value " << val << " from stack" << std::endl;
+    }
+
+    s.inspect();
+
+    // Read doubles back from fifo
     while (!s.empty()) {
         double val = s.pop();
         //std::cout << "popping value " << val << " from stack" << std::endl;

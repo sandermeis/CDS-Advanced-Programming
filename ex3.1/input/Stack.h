@@ -5,6 +5,7 @@ class Stack {
    public:
     // Constructor
     Stack();
+    Stack(int sz);
 
     // Destructor
     ~Stack();
@@ -18,14 +19,12 @@ class Stack {
     void push(double c);
     void inspect();
     double pop();
+    void grow(int delta);
 
    private:
-    // Implementation
-    static const int LEN = 80;  // default stack length
-    double s[LEN];
+    double* s;
+    int LEN;  // default stack length
     int count;
-
-    void init() { count = 0; }
 };
 
 #endif
