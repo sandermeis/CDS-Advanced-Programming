@@ -2,24 +2,29 @@
 #define TELEPHONE_HH
 
 #include "Cable.hh"
-#include "Housing.hh"
 #include "Dialer.hh"
 #include "Handset.hh"
+#include "Housing.hh"
 
 class Telephone {
-public:
+   public:
+    Telephone(){
+        std::cout << "Telephone Constructor " << this << std::endl;
+    }
 
-  Telephone() { std::cout << "Telephone Constructor " << this << std::endl ; }
-  Telephone(const Telephone&) { std::cout << "Telephone Copy Constructor " << this << std::endl ; }
-  ~Telephone() { std::cout << "Telephone Destructor " << this << std::endl ; }
+    Telephone(const Telephone& other):cable(other.cable),housing(other.housing),dialer(other.dialer),handset(other.handset) {
+        std::cout << "Telephone Copy Constructor " << this << std::endl;
+    }
 
-private:
+    ~Telephone() {
+        std::cout << "Telephone Destructor " << this << std::endl;
+    }
 
-  Cable cable ;
-  Housing housing ;
-  Dialer dialer ;
-  Handset handset ;
+   private:
+    Cable cable;
+    Housing housing;
+    Dialer dialer;
+    Handset handset;
+};
 
-} ;
-
-#endif 
+#endif
