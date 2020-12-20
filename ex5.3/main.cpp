@@ -3,6 +3,7 @@
 // and
 // example.txt wc -c example.txt returns 4323
 // while actual lines and characters are 81 and 4243 respectively, this is probably because wc also counts new lines
+// The >> operator returns false when end of line is reached, for each true the while loop is iterated, so that equals number of words.
 // This algorithm does count "-" as words
 
 #include <fstream>
