@@ -24,3 +24,5 @@ class Stack {
     Array<T> s;
     int count;
 };
+
+#include "Stack.tpp"

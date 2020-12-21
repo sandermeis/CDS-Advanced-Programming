@@ -15,31 +15,31 @@ int main() {
         s.push(i * i);
     }
     
-    // Stack<double> sclone=s;
+    Stack<double> sclone=s;
 
-    // std::cout << "Inspecting s" << std::endl;
-    // s.inspect();
-    // std::cout << "Inspecting sclone" << std::endl;
-    // sclone.inspect();
+    std::cout << "Inspecting s" << std::endl;
+    s.inspect();
+    std::cout << "Inspecting sclone" << std::endl;
+    sclone.inspect();
 
-    // // Read doubles back from stack
-    // while (!s.empty()) {
-    //     double val = s.pop();
-    //     //std::cout << "popping value " << val << " from stack" << std::endl;
-    // }
-    // std::cout << "Inspecting s" << std::endl;
-    // s.inspect();
-    // std::cout << "Inspecting sclone" << std::endl;
-    // sclone.inspect();
+    // Read doubles back from stack
+    while (!s.empty()) {
+        double val = s.pop();
+        //std::cout << "popping value " << val << " from stack" << std::endl;
+    }
+    std::cout << "Inspecting s" << std::endl;
+    s.inspect();
+    std::cout << "Inspecting sclone" << std::endl;
+    sclone.inspect();
 
-    // for (int i = 0; i < 5; i++) {
-    //    s.push(100 * i);
-    // }
+    for (int i = 0; i < 5; i++) {
+       s.push(100 * i);
+    }
 
-    // std::cout << "Inspecting s" << std::endl;
-    // s.inspect();
-    // std::cout << "Inspecting sclone" << std::endl;
-    // sclone.inspect();
+    std::cout << "Inspecting s" << std::endl;
+    s.inspect();
+    std::cout << "Inspecting sclone" << std::endl;
+    sclone.inspect();
 
     return 0;
 }
