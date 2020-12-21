@@ -22,9 +22,7 @@ int main() {
         myMap[word] += 1;
     }
 
-std::map<std::string, int>::iterator it;
-
-for (auto i = myMap.begin(); i!=myMap.end(); i++){
+for (std::map<std::string, int>::iterator i = myMap.begin(); i!=myMap.end(); i++){
     std::cout << i->second << "x " << i->first << std::endl;
 }
 
