@@ -1,8 +1,5 @@
-import example
+import threadbind
 
-:example.add(max_time,n_iterations)
+c = threadbind.Channel(850, 80, 4, 3)
 
-p = example.Pet('Molly')
-p.getName()
-p.setName('Charly')
-p.getName()
+c.start()
