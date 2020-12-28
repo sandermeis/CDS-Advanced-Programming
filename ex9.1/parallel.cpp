@@ -8,6 +8,7 @@
 #include <thread>
 #include <chrono>
 #include <vector>
+#include <functional>
 
 void f1(std::vector<std::string>& s) {
     std::cout << s[0] << std::endl;

@@ -1,68 +1,57 @@
 #include <chrono>
 #include <condition_variable>
-#include <deque>
 #include <iostream>
 #include <mutex>
+#include <queue>
+#include <random>
+#include <string>
 #include <thread>
 #include <vector>
 
-class Channel {
-   public:
-    Channel() {
-        start();
-    }
+std::random_device d;
+std::mt19937 mt(d());
+int t_max = 3000;
+std::uniform_int_distribution<> distr(0., t_max);
 
-    void add() {
-        while (true) {
-            int num = std::rand() % 100;
-            {
-                std::unique_lock<std::mutex> locker(mu);
-                cond.wait(locker, [this]() { return buffer_.size() < size_; });
-                buffer_.push_back(num);
-                std::cout << "Produced: " << num << std::endl;
-            }
-            cond.notify_all();
-            std::this_thread::sleep_for(std::chrono::milliseconds(500));
+
+std::mutex m;
+std::condition_variable cv;
+std::queue<double> q;
+
+void some_producer() {
+    double a = 3.14159;
+    q.push(a);q.push(a);q.push(a);
+    while (true) {
+        int n = distr(mt);
+        std::this_thread::sleep_for(std::chrono::milliseconds(n));
+        {
+            std::unique_lock<std::mutex> l(m);
+            q.push(a);
+            std::cout << "inserted a value" << std::endl
+                      << "size: " << q.size() << std::endl;
+            cv.notify_one();
         }
     }
+}
 
-    int remove() {
-        while (true) {
-            {
-                std::unique_lock<std::mutex> locker(mu);
-                cond.wait(locker, [this]() { return buffer_.size() > 0; });
-                int num = buffer_.back();
-                buffer_.pop_back();
-                std::cout << "Consumed: " << num << std::endl;
-            }
-            cond.notify_all();
-            std::this_thread::sleep_for(std::chrono::milliseconds(800));
+void some_consumer() {
+    while (true) {
+        {
+            std::unique_lock<std::mutex> l(m);
+            cv.wait(l, []{ return !q.empty(); });
+
+            q.pop();
+            std::cout << "deleted a value" << std::endl;
         }
+        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
     }
-
-    void start() {
-        some_threads.push_back(std::thread(&Channel::add, this));
-        some_threads.push_back(std::thread(&Channel::remove, this));
-        finish();
-    }
-
-    void finish() {
-        for (auto& t : some_threads) {
-            t.join();
-        }
-    }
-
-   private:
-    std::mutex mu;
-    std::condition_variable cond;
-    std::vector<std::thread> some_threads;
-
-    std::deque<int> buffer_;
-    const unsigned int size_ = 10;
-};
+}
 
 int main() {
-    Channel b;
+    std::thread t1(some_producer);
+    std::thread t2(some_consumer);
 
+    t1.join();
+    t2.join();
     return 0;
 }
